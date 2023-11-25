@@ -14,6 +14,7 @@
             margin-top: 50px;
             display: flex;
             flex-direction: column;
+            display: none;
         }
         .head {
             color: limegreen;
@@ -84,6 +85,36 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var container = document.querySelector('.container');
+        if(localStorage.getItem('wait') === 'true'){
+            clearElements();
+            var warn = document.createElement('div');
+            warn.textContent = 'Don\'t refresh while working. Please wait for 30 seconds..';
+            warn.style.color = 'red';
+            warn.style.fontWeight = 'bold';
+            document.body.style.background = 'white';
+            document.body.appendChild(warn);
+            setTimeout(function() {
+                localStorage.setItem('wait', 'false');
+                document.body.removeChild(warn);
+                document.body.style.background = '#1f1f1f';
+                container.style.display = "flex"
+                window.location = window.location;
+            }, 30000);
+        }
+        else
+        {
+            document.body.style.background = '#1f1f1f';
+            container.style.display = "flex"
+        }
+    });
+    function clearElements(){
+        var body = document.body;
+            while (body.firstChild) {
+                body.removeChild(body.firstChild);
+            }
+    }
     async function getOrginalurl() {
         var code = document.getElementById('code');
         if(code.value === "")
@@ -92,9 +123,9 @@
             return;
         }
         var btn = document.getElementById('getBtn');
-        btn.textContent = "please, wait..";
+        btn.textContent = "please, wait...";
         btn.disabled = true;
-
+        localStorage.setItem('wait', 'true');
         var server_endpoint = 'https://imcqmbsfcogdnpjvkmvk.bsite.net/Bypass/' + code.value;
 
         await fetch(server_endpoint, {
@@ -107,9 +138,11 @@
         .catch(error => {
             displayOutput("Error: " + error, true);
         });
-
-        btn.disabled = false;
-        btn.textContent = "Get original url";
+        setTimeout(function() {
+            localStorage.setItem('wait', 'false');
+            btn.disabled = false;
+            btn.textContent = "Get original url";
+        }, 5000);
     }
     function displayOutput(output, isError){
         var outputElement = document.querySelector('.output');
@@ -118,7 +151,7 @@
         if (isError === true) {
             outputElement.style.background = "#3a1f1f";
             anchorElement.href = "#";
-            anchorElement.textContent = output;
+            anchorElement.textContent = "an error occurred please try again later.";
             console.log(output);
         }
         else{
