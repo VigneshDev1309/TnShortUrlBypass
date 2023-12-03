@@ -95,7 +95,7 @@ namespace WebSubmit
                     requestHeaders.Add("Sec-Fetch-Mode", "cors");
                     requestHeaders.Add("Sec-Fetch-Dest", "empty");
                     requestHeaders.Add("Cache-Control", "no-cache");
-                    requestHeaders.Add("Referer", "https://go.tnshort.net/vExmPdt");
+                    requestHeaders.Add("Referer", "https://go.tnshort.net/" + code);
                     requestHeaders.Add("Accept-Encoding", "gzip, deflate");
                     #endregion
                     var formData = new FormUrlEncodedContent(new[]
