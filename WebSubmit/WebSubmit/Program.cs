@@ -19,7 +19,9 @@ namespace WebSubmit
     {
         static void Main(string[] args)
         { 
-            Console.WriteLine(Script("JqR1W").Result);
+            // Watch https://github.com/VigneshDev1309/TnShortUrlBypass/tree/main#video-demonstration
+            // Replace CODE
+            Console.WriteLine(Script("CODE").Result);
             Console.ReadLine();
         }
 
