@@ -20,7 +20,7 @@ namespace WebSubmit
         static void Main(string[] args)
         { 
             // Watch https://github.com/VigneshDev1309/TnShortUrlBypass/tree/main#video-demonstration
-            // Replace CODE
+            // Replace CODE to your shorten link code
             Console.WriteLine(Script("CODE").Result);
             Console.ReadLine();
         }
